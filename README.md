@@ -1,4 +1,4 @@
-# Typescript Core Guidelines
+# Typescript Coding Guidelines
 The Typescript Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in Typescript
 
 [![Typescript Core Guidelines](cpp_core_guidelines_logo_text.png)](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
