@@ -43,10 +43,7 @@ We plan to modify and extend this document as our understanding improves and the
     where it was created. You can't access the variable externally. This is usually the strategy used in most of the strongly typed languages.
 - Prefer `const` over `let` when possible, and **avoid using var**.
 - Always initialize variables to avoid undefined behavior
-- Variables needs to be expressive.
 - Always define the type for your variable.
-- Adopt camel-case naming convention for variable declaration.
-  - Good variable names: `age, addressDetails, etc.`
 - Declaration patterns: designator statement, variable name, type, and optional assignment operator + value.
 
 > <> _Don’t ever use the types Number, String, Boolean, Symbol, or Object These types refer to non-primitive boxed objects that are
@@ -78,4 +75,7 @@ let y: number = 100;
 
 ## Proposed practice for Variable Declaration
 
-- Variable names needs to
+- Variable names needs to be expressive.
+- Adopt camel-case naming convention for variable declaration.
+  - Good variable names: `age, addressDetails, etc.`
+  - Good constant names: `MAX_AGE, BUFFER_SIZE, etc.`
