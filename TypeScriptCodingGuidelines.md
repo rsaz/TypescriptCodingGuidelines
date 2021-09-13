@@ -7,6 +7,19 @@ Editors:
 - [Richard Zampieri](http)
 - [Maybe you can help?]()
 
+# <a name="S-why"></a>Why do we need coding guidelines?
+
+Is a general rule of software development to craft applications that are readable, maintainable and scalable. This is not always the truth but we aim for this goal.
+
+Code standards are tools that helps to achieve building applications with the triad principles mentioned above. Here are some of the benefits that are provided by establishing a consistent development guideline:
+
+- Reduction of security risks
+- Increase of software performance
+- Reduce the system complexity
+- Cost-efficient.
+
+# <a name="S-doc"></a>This Document
+
 This is a living document under continuous improvement.
 Copying, use, modification, and creation of derivative works from this project is licensed under an MIT-style license.
 Contributing to this project requires agreeing to a Contributor License. See the accompanying [LICENSE](LICENSE) file for details.
@@ -15,28 +28,54 @@ We make this project available to "friendly users" to use, copy, modify, and der
 Comments and suggestions for improvements are most welcome.
 We plan to modify and extend this document as our understanding improves and the language and the set of available libraries improve.
 
-You can [read an explanation of the scope and structure of this Guide](#S-abstract) or just jump straight in:
+# <a name="S-summary"></a>Summary
 
-- [A: Architecture](#S-architecture)
+- [V: Variable Declaration](#S-variables)
 - [C: Configuration](#S-configuration)
 - [L: Language Features](#S-language-features)
 
-# <a name="S-architecture"></a>A: Architecture
+# <a name="S-variables"></a>V: Variable Declaration
 
-## Layer Overview
+- To declare a variable you can use the keywords `var`, `let` or `const`.
+  - **const:** increase the predictability of your code, that intrinsically improve performance.
+  - **var:** is globally scoped, doesn't respect code blocks, this may sometimes generate confusion. **Avoid var when you can**.
+  - **let:** is scoped constrained. If you declare a variable inside of a scope that variable will exist only inside of the scope
+    where it was created. You can't access the variable externally. This is usually the strategy used in most of the strongly typed languages.
+- Prefer `const` over `let` when possible, and **avoid using var**.
+- Always initialize variables to avoid undefined behavior
+- Variables needs to be expressive.
+- Always define the type for your variable.
+- Adopt camel-case naming convention for variable declaration.
+  - Good variable names: `age, addressDetails, etc.`
+- Declaration patterns: designator statement, variable name, type, and optional assignment operator + value.
 
-[![Typescript Architecture](ts-layer-overview.png)](http://)
+> <> _Don’t ever use the types Number, String, Boolean, Symbol, or Object These types refer to non-primitive boxed objects that are
+> almost never used appropriately in JavaScript code_.
 
-| Core TypeScript Compiler     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Parser                       | Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Binder                       | Linking declarations contributing to the same structure using a Symbol (e.g. different declarations of the same interface or module, or a function and a module with the same name). This allows the type system to reason about these named declarations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Type resolver / Checker      | Resolving types of each construct, checking semantic operations and generate diagnostics as appropriate.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Emitter                      | Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Pre-processor                | The "Compilation Context" refers to all files involved in a "program". The context is created by inspecting all files passed in to the compiler on the command line, in order, and then adding any files they may reference directly or indirectly through import statements and /// <reference path=... /> tags. The result of walking the reference graph is an ordered list of source files, that constitute the program. When resolving imports, preference is given to ".ts" files over ".d.ts" files to ensure the most up-to-date files are processed. The compiler does a node-like process to resolve imports by walking up the directory chain to find a source file with a .ts or .d.ts extension matching the requested import. Failed import resolution does not result in an error, as an ambient module could be already declared. |
-| Standalone Compiler (tsc)    | The batch compilation CLI. Mainly handle reading and writing files for different supported engines (e.g. Node.js).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Language Service             | The "Language Service" exposes an additional layer around the core compiler pipeline that are best suiting editor-like applications. The language service supports the common set of a typical editor operations like statement completions, signature help, code formatting and outlining, colorization, etc... Basic re-factoring like rename, Debugging interface helpers like validating breakpoints as well as TypeScript-specific features like support of incremental compilation (--watch equivalent on the command-line). The language service is designed to efficiently handle scenarios with files changing over time within a long-lived compilation context; in that sense, the language service provides a slightly different perspective about working with programs and source files from that of the other compiler interfaces. |
-| Standalone Server (tsserver) | The `tsserver` wraps the compiler and services layer, and exposes them through a JSON protocol.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+```
+// Variable declaration
+// Designator - variable name - assignment operator - optional value
 
-[Please refer to Microsoft TypeScript Architecture Overview page for more details](https://github.com/microsoft/TypeScript/wiki/Architectural-Overview)
-|
+let   name: string = "developer";
+const name: string = "developer";
+
+{Without optional value}
+
+let   name: string;
+const name: string;
+```
+
+```
+// Use of let
+let y: number = 100;
+ {
+	let x: number = 10;
+	y = 101; {OK}
+ }
+
+ x = 11; {You can't assign value to the variable x because the variable was created in a blocked scope}
+```
+
+## Proposed practice for Variable Declaration
+
+- Variable names needs to
