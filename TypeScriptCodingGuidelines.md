@@ -66,8 +66,8 @@ const name: string;
 // Use of let
 let y: number = 100;
  {
-	let x: number = 10;
-	y = 101; {OK}
+ let x: number = 10;
+ y = 101; {OK}
  }
 
  x = 11; {You can't assign value to the variable x because the variable was created in a blocked scope}
@@ -117,9 +117,9 @@ let y: number = 100;
   - **number:** represents an integer or floating point number. Ex. 56 or 76.987. The size of a number is a double-precision 64-bit binary [format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
   - **bigint:** can represent integers of arbitrary size, larger than whole numbers 2^53 - 1. `Number.MAX_SAFE_INTEGER` is the largest number JavaScript can represent with a number primitive (or Number value).
   - **string:** sequence of characters used to represent text. Ex. "Hello World".
-  - **symbol:**
+  - **symbol:** a unique and immutable unique symbol. Used to represent a property key, and used to avoid conflicts with other symbols.
   - **object:**
   - **any:**
   - **Array:**
 
-  ## Proposed practice for Types
+## Proposed practice for Types
