@@ -31,7 +31,7 @@ We plan to modify and extend this document as our understanding improves and the
 # <a name="S-summary"></a>Summary
 
 - [V: Variable Declaration](#S-variables)
-- [C: Configuration](#S-configuration)
+- [T: Types](#S-types)
 - [L: Language Features](#S-language-features)
 
 # <a name="S-variables"></a>V: Variable Declaration
@@ -79,3 +79,47 @@ let y: number = 100;
 - Adopt camel-case naming convention for variable declaration.
   - Good variable names: `age, addressDetails, etc.`
   - Good constant names: `MAX_AGE, BUFFER_SIZE, etc.`
+
+# <a name="S-types"></a>T: Types
+
+- Primitive data types are:
+
+  - **boolean:** true or false (it is not equivalent to 0 and 1). There is no data overlap between boolean and number.
+  - **null:** null varies from language to language but in type script null represents the absence of value, nonexistent or invalid object or address.
+
+  ```
+  class MyType {
+    public typeInfo: string = "MyType";
+  }
+
+  let myType: MyType = new MyType();
+  console.log(myType.typeInfo); // MyType {OK}
+
+  myType = null; // Setting object to point to null
+  console.log(myType); // null {OK}
+  console.log(myType.typeInfo); // cannot read property 'typeInfo' of null {NOK}
+  ```
+
+  - **undefined:** when a variable is declared but not initialized or when an argument is not formally passed.
+
+  ```
+  let x: number; // variable declared but not initialized
+  console.log(x) // undefined
+
+  function MyFunction(x: number)
+  {
+    console.log(x);
+  }
+
+  MyFunction(); // undefined
+  ```
+
+  - **number:** represents an integer or floating point number. Ex. 56 or 76.987. The size of a number is a double-precision 64-bit binary [format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
+  - **bigint:** can represent integers of arbitrary size, larger than whole numbers 2^53 - 1. `Number.MAX_SAFE_INTEGER` is the largest number JavaScript can represent with a number primitive (or Number value).
+  - **string:** sequence of characters used to represent text. Ex. "Hello World".
+  - **symbol:**
+  - **object:**
+  - **any:**
+  - **Array:**
+
+  ## Proposed practice for Types
