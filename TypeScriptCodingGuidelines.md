@@ -117,9 +117,24 @@ let y: number = 100;
   - **number:** represents an integer or floating point number. Ex. 56 or 76.987. The size of a number is a double-precision 64-bit binary [format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
   - **bigint:** can represent integers of arbitrary size, larger than whole numbers 2^53 - 1. `Number.MAX_SAFE_INTEGER` is the largest number JavaScript can represent with a number primitive (or Number value).
   - **string:** sequence of characters used to represent text. Ex. "Hello World".
-  - **symbol:** a unique and immutable unique symbol. Used to represent a property key, and used to avoid conflicts with other symbols.
-  - **object:**
-  - **any:**
-  - **Array:**
+  - **symbol:** a unique and immutable symbol. Used to represent a property key, and used to avoid conflicts with other symbols.
+  - **object:** any javascript value with a set of properties.
+  - **any:** is a special type that you can use whenever you don't want to specify a type, or you don't want a particular value to cause a typechecking error. If you don't specify a type, or Typescript can't infer the type from it context,the compiler will default to any. You don't usually want to use any because defeats the purpose of typechecking.
+  - **Array:** is an ordered list of values. In Typescript you can use array type to specify a list of values.
+    Arrays can be declared using the generics template `let myArray: Array<number>` or the type annotation `let myArray: number[]`.
 
-## Proposed practice for Types
+## Table of Types
+
+| Type      | Use                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------- |
+| boolean   | when we want to represent true or false                                                     |
+| null      | to represent absence of value, invalid object                                               |
+| undefined | when a variable is declared but not initialized or when an argument is not formally passed. |
+| number    | when we want to represent an integer or a floating point                                    |
+| bigint    | to represent a large integer number                                                         |
+| string    | represent a sequence of characters                                                          |
+| symbol    | to represent a unique symbol                                                                |
+| object    | to represent a value with a set of properties. Ex. { id: 1, foo: 'foo' }                    |
+| any       | to be used to avoid typechecking. Try to do not use this type much                          |
+| array     | ordered list of values. Can be used combined with any other type                            |
+|           |
