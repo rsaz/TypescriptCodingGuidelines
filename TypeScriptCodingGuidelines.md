@@ -137,4 +137,3 @@ let y: number = 100;
 | object    | to represent a value with a set of properties. Ex. { id: 1, foo: 'foo' }                    |
 | any       | to be used to avoid typechecking. Try to do not use this type much                          |
 | array     | ordered list of values. Can be used combined with any other type                            |
-|           |
