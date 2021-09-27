@@ -49,7 +49,7 @@ We plan to modify and extend this document as our understanding improves and the
 > <> _Don’t ever use the types Number, String, Boolean, Symbol, or Object These types refer to non-primitive boxed objects that are
 > almost never used appropriately in JavaScript code_.
 
-```
+```typescript
 // Variable declaration
 // Designator - variable name - assignment operator - optional value
 
@@ -62,7 +62,7 @@ let   name: string;
 const name: string;
 ```
 
-```
+```typescript
 // Use of let
 let y: number = 100;
  {
@@ -87,7 +87,7 @@ let y: number = 100;
   - **boolean:** true or false (it is not equivalent to 0 and 1). There is no data overlap between boolean and number.
   - **null:** null varies from language to language but in type script null represents the absence of value, nonexistent or invalid object or address.
 
-  ```
+  ```typescript
   class MyType {
     public typeInfo: string = "MyType";
   }
@@ -102,12 +102,11 @@ let y: number = 100;
 
   - **undefined:** when a variable is declared but not initialized or when an argument is not formally passed.
 
-  ```
+  ```typescript
   let x: number; // variable declared but not initialized
-  console.log(x) // undefined
+  console.log(x); // undefined
 
-  function MyFunction(x: number)
-  {
+  function MyFunction(x: number) {
     console.log(x);
   }
 
