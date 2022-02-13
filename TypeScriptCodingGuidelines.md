@@ -50,7 +50,7 @@ We plan to modify and extend this document as our understanding improves and the
 | compound function name  | PascalCase | MyFunction     | `function MyFunction()`           |
 | class name              | PascalCase | Class          | `class Base`                      |
 | compound class name     | PascalCase | MyClass        | `class MyClass`                   |
-
+| interface name          | PascalCase | Interface      | `interface IMyInterface`          |
 
 # <a name="S-variables"></a>Variable Declaration
 
@@ -91,18 +91,17 @@ let y: number = 100;
  x = 11; {You can't assign value to the variable x because the variable was created in a blocked scope}
 ```
 
-## Proposed practice for Variable Declaration
-
-- Variable names needs to be expressive.
-- Adopt camel-case naming convention for variable declaration.
-  - Good variable names: `age, addressDetails, etc.`
-  - Good constant names: `MAX_AGE, BUFFER_SIZE, etc.`
-
 # <a name="S-types"></a>Types & Subtypes
 
-- Primitive data types are:
+- Brief explanation of types and subtypes:
 
+  - **number:** represents an integer or floating point number. Ex. 56 or 76.987. The size of a number is a double-precision 64-bit binary [format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
+  - **bigint:** can represent integers of arbitrary size, larger than whole numbers 2^53 - 1. `Number.MAX_SAFE_INTEGER` is the largest number JavaScript can represent with a number primitive (or Number value).
+  - **string:** sequence of characters used to represent text. Ex. "Hello World".
+  - **symbol:** a unique and immutable symbol. Used to represent a property key, and used to avoid conflicts with other symbols.
   - **boolean:** true or false (it is not equivalent to 0 and 1). There is no data overlap between boolean and number.
+  - **Array:** is an ordered list of values. In Typescript you can use array type to specify a list of values.
+  Arrays can be declared using the generics template `let myArray: Array<number>` or the type annotation `let myArray: number[]`.
   - **null:** null varies from language to language but in type script null represents the absence of value, nonexistent or invalid object or address.
 
   ```typescript
@@ -131,16 +130,11 @@ let y: number = 100;
   MyFunction(); // undefined
   ```
 
-  - **number:** represents an integer or floating point number. Ex. 56 or 76.987. The size of a number is a double-precision 64-bit binary [format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
-  - **bigint:** can represent integers of arbitrary size, larger than whole numbers 2^53 - 1. `Number.MAX_SAFE_INTEGER` is the largest number JavaScript can represent with a number primitive (or Number value).
-  - **string:** sequence of characters used to represent text. Ex. "Hello World".
-  - **symbol:** a unique and immutable symbol. Used to represent a property key, and used to avoid conflicts with other symbols.
   - **object:** any javascript value with a set of properties.
   - **any:** is a special type that you can use whenever you don't want to specify a type, or you don't want a particular value to cause a typechecking error. If you don't specify a type, or Typescript can't infer the type from it context,the compiler will default to any. You don't usually want to use any because defeats the purpose of typechecking.
-  - **Array:** is an ordered list of values. In Typescript you can use array type to specify a list of values.
-    Arrays can be declared using the generics template `let myArray: Array<number>` or the type annotation `let myArray: number[]`.
   - **void** is a special type that is used to represent the absence of a value.
   - **unknown:** is a type that represents any value. It is the default type for any variable that is not explicitly typed.
+  - **never:** is a type that represents the absence of a value. Unreachable code is typed as never.
 
 ## Table of Types
 
@@ -163,6 +157,7 @@ let y: number = 100;
 | any       | to be used to avoid typechecking. Try to do not use this type much                          |
 | void      | to represent the absence of a value                                                         |
 | unknown   | to represent any value. Prefer to use unknown rather than any                               |
+| never     | to represent the absence of a value. It is the default type for any variable that is not    |
 
 ## Assignment of Subtypes
 
