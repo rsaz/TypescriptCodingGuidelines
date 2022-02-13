@@ -31,7 +31,10 @@ We plan to modify and extend this document as our understanding improves and the
 # <a name="S-summary"></a>Summary
 
 - [V: Variable Declaration](#S-variables)
-- [T: Types](#S-types)
+- [CV: Conventions](#CV-conventions)
+- [T: Types & SubTypes](#S-types)
+- [TC: Type Casting](#TC-casting)
+- [CF: Conditional Flow](#CF-flow)
 - [L: Language Features](#S-language-features)
 
 # <a name="S-variables"></a>V: Variable Declaration
@@ -80,7 +83,7 @@ let y: number = 100;
   - Good variable names: `age, addressDetails, etc.`
   - Good constant names: `MAX_AGE, BUFFER_SIZE, etc.`
 
-# <a name="S-types"></a>T: Types
+# <a name="S-types"></a>T: Types & Subtypes
 
 - Primitive data types are:
 
@@ -121,18 +124,79 @@ let y: number = 100;
   - **any:** is a special type that you can use whenever you don't want to specify a type, or you don't want a particular value to cause a typechecking error. If you don't specify a type, or Typescript can't infer the type from it context,the compiler will default to any. You don't usually want to use any because defeats the purpose of typechecking.
   - **Array:** is an ordered list of values. In Typescript you can use array type to specify a list of values.
     Arrays can be declared using the generics template `let myArray: Array<number>` or the type annotation `let myArray: number[]`.
+  - **void** is a special type that is used to represent the absence of a value. 
+  - **unknown:** is a type that represents any value. It is the default type for any variable that is not explicitly typed. 
 
 ## Table of Types
 
 | Type      | Use                                                                                         |
 | --------- | ------------------------------------------------------------------------------------------- |
 | boolean   | when we want to represent true or false                                                     |
-| null      | to represent absence of value, invalid object                                               |
-| undefined | when a variable is declared but not initialized or when an argument is not formally passed. |
 | number    | when we want to represent an integer or a floating point                                    |
 | bigint    | to represent a large integer number                                                         |
 | string    | represent a sequence of characters                                                          |
 | symbol    | to represent a unique symbol                                                                |
+| array     | ordered list of values. Can be used combined with any other type                            |
+
+## Table of Subtypes
+
+| Type      | Use                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------- |
+| null      | to represent absence of value, invalid object                                               |
+| undefined | when a variable is declared but not initialized or when an argument is not formally passed. |
 | object    | to represent a value with a set of properties. Ex. { id: 1, foo: 'foo' }                    |
 | any       | to be used to avoid typechecking. Try to do not use this type much                          |
-| array     | ordered list of values. Can be used combined with any other type                            |
+| void      | to represent the absence of a value                                                         |
+| unknown   | to represent any value. Prefer to use unknown rather than any                               |
+
+## Assignment of Subtypes
+
+| Type      | any  | unknown | object | void | undefined | null | never |
+| --------- | ---- | ------- | ------ | ---- | --------- | ---- | ----- |
+| any       |      | OK      | OK     | OK   | OK        | OK   |       |
+| unknown   | OK   |         |        |      |           |      |       |
+| object    | OK   | OK      |        |      |           |      |       |
+| void      | OK   | OK      |        |      |           |      |       |
+| never     | OK   | OK      | OK     | OK   | OK        | OK   |       |
+| null      | OK   | OK      | OK     | OK   | OK        |      |       |
+| undefined | OK   | OK      | OK     | OK   |           | OK   |       |
+
+# <a name="TC-casting"></a>TC: Type Casting
+
+- Type casting is the capability to convert one type to another. In Typescript you can use `as` or `<>` to convert a value to a different type.
+- When `any` or `unknown` is used, you can't use `as` or `<>` to convert a value to a specific type. **Always prefer to use unknown over any**. Unknown will force to explicitly specify the type. Unknown also prevents you to reasign a value to a variable without casting it.
+
+```typescript
+let varUnknown: unknown = 'foo';
+let varAny: any = 'foo';
+
+// Reassign of values
+varUnknown = 1;
+varAny = 1;
+
+// Variable reassignment
+let varStringAny: string = varAny; // (OK)
+let varStringUnknown: string = varUnknown; // (NOK)
+
+// Typecasting is necessary
+let varStringUnknown1: string = <string>varUnknown; // (OK)
+// Or
+let varStringUnknown2: string = varUnknown as string; // (OK)
+// Or
+let varStringUnknown3: string = String(varUnknown); // (OK)
+```  
+
+## From any type to string, except object type
+
+```typescript
+let localNumber: number = 1;
+// Recommended methods below : More readable
+let localNumberToString1: string = localNumber.toString();
+let localNumberToString2: string = String(localNumber);
+let localNumberToString3: string = localNumber as unknown as string;
+
+let localNumberToString4: string = <string>(localNumber as unknown);
+let localNumberToString5: string = (<unknown>localNumber) as string;
+```  
+
+# <a name="CF-flow"></a>CF: Conditional Flow
