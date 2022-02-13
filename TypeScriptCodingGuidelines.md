@@ -30,14 +30,29 @@ We plan to modify and extend this document as our understanding improves and the
 
 # <a name="S-summary"></a>Summary
 
-- [V: Variable Declaration](#S-variables)
-- [CV: Conventions](#CV-conventions)
-- [T: Types & SubTypes](#S-types)
-- [TC: Type Casting](#TC-casting)
-- [CF: Conditional Flow](#CF-flow)
-- [L: Language Features](#S-language-features)
+- [Proposed Convention](#P-Conventions)
+- [Variable Declaration](#S-variables)
+- [Types & SubTypes](#S-types)
+- [Type Casting](#TC-casting)
+- [Conditional Flow](#CF-flow)
+- [Language Features](#S-language-features)
 
-# <a name="S-variables"></a>V: Variable Declaration
+# <a name="P-Conventions"></a>Proposed Convention
+
+| Name                    | Convention | Example        | Code                              |
+|-------------------------|------------|----------------|-----------------------------------|
+| single variable name    | camelCase  | variable       | `let age: number = 0;`            |
+| compound variable name  | camelCase  | variableName   | `let firstName: string = "";`     |
+| constant name           | UPPER_CASE | CONSTANT       | `const CORES: number = 100;`      |
+| compound constant name  | UPPER_CASE | CONSTANT_NAME  | `const MAX_NUMBER: number = 100;` |
+| enum name               | PascalCase | MyEnum         | `enum MyEnum { A, B, C };`        |
+| function name           | PascalCase | Function       | `function Function()`             |
+| compound function name  | PascalCase | MyFunction     | `function MyFunction()`           |
+| class name              | PascalCase | Class          | `class Base`                      |
+| compound class name     | PascalCase | MyClass        | `class MyClass`                   |
+
+
+# <a name="S-variables"></a>Variable Declaration
 
 - To declare a variable you can use the keywords `var`, `let` or `const`.
   - **const:** increase the predictability of your code, that intrinsically improve performance.
@@ -83,7 +98,7 @@ let y: number = 100;
   - Good variable names: `age, addressDetails, etc.`
   - Good constant names: `MAX_AGE, BUFFER_SIZE, etc.`
 
-# <a name="S-types"></a>T: Types & Subtypes
+# <a name="S-types"></a>Types & Subtypes
 
 - Primitive data types are:
 
@@ -124,8 +139,8 @@ let y: number = 100;
   - **any:** is a special type that you can use whenever you don't want to specify a type, or you don't want a particular value to cause a typechecking error. If you don't specify a type, or Typescript can't infer the type from it context,the compiler will default to any. You don't usually want to use any because defeats the purpose of typechecking.
   - **Array:** is an ordered list of values. In Typescript you can use array type to specify a list of values.
     Arrays can be declared using the generics template `let myArray: Array<number>` or the type annotation `let myArray: number[]`.
-  - **void** is a special type that is used to represent the absence of a value. 
-  - **unknown:** is a type that represents any value. It is the default type for any variable that is not explicitly typed. 
+  - **void** is a special type that is used to represent the absence of a value.
+  - **unknown:** is a type that represents any value. It is the default type for any variable that is not explicitly typed.
 
 ## Table of Types
 
@@ -161,7 +176,7 @@ let y: number = 100;
 | null      | OK   | OK      | OK     | OK   | OK        |      |       |
 | undefined | OK   | OK      | OK     | OK   |           | OK   |       |
 
-# <a name="TC-casting"></a>TC: Type Casting
+# <a name="TC-casting"></a>Type Casting
 
 - Type casting is the capability to convert one type to another. In Typescript you can use `as` or `<>` to convert a value to a different type.
 - When `any` or `unknown` is used, you can't use `as` or `<>` to convert a value to a specific type. **Always prefer to use unknown over any**. Unknown will force to explicitly specify the type. Unknown also prevents you to reasign a value to a variable without casting it.
@@ -199,4 +214,4 @@ let localNumberToString4: string = <string>(localNumber as unknown);
 let localNumberToString5: string = (<unknown>localNumber) as string;
 ```  
 
-# <a name="CF-flow"></a>CF: Conditional Flow
+# <a name="CF-flow"></a>Conditional Flow
